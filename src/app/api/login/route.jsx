@@ -1,12 +1,14 @@
 "use server"
+import { getRefreshToken, getToken, setRefreshToken, setToken } from '@/app/lib/auth'
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 
 const DJANGO_API_LOGIN_URL = "http://127.0.0.1:8001/api/token/pair"
 
 export async function POST(request) {
-    const myAuthToken = cookies().get('auth-token')
-    console.log(myAuthToken.value)
+    const myAuthToken = getToken()
+    const myRefreshToken = getRefreshToken()
+    console.log(myAuthToken, myRefreshToken)
     
     const requestData = await request.json()
     const jsonData = JSON.stringify(requestData)
@@ -21,15 +23,9 @@ export async function POST(request) {
     const responseData = await response.json()
     if (response.ok) {
         console.log("logged in")
-        const authToken = responseData.access
-        cookies().set({
-            name: 'auth-token',
-            value: authToken,
-            httpOnly: true, // limit client-side js
-            sameSite: 'strict',
-            secure: process.env.NODE_ENV !== 'development',
-            maxAge: 3600,
-        })
+        const {access, refresh} = responseData
+        setToken(access)
+        setRefreshToken(refresh)
     }
 
     // const authToken = cookies().get("auth-token")

@@ -2,29 +2,24 @@
 import {useState} from 'react';
 import Image from "next/image";
 import useSWR from 'swr';
+import { useAuth } from '@/components/authProvider';
 
 
 const fetcher = (...args) => fetch(...args).then(res => res.json())
 
 
 export default function Home() {
-  // GET REQUESTS
+  const auth = useAuth()
   const {data, error, isLoading} = useSWR("http://127.0.0.1:8001/api/hello", fetcher)
   if (error) return <div>failed to load</div>
   if (isLoading) return <div>loading...</div>
  
-  // const [data, setData] = useState({})
-  // async function getDjangoAPIData() {
-  //   const response = await fetch("http://127.0.0.1:8001/api/hello");
-  //   const responseData = await response.json();
-  //   // console.log(data);
-  //   setData(responseData)
-  // }
-  // async function handleClick() {
-  //   await getDjangoAPIData()
-  // }
+  
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <div>
+        {auth.isAuthenticated ? "Hello user" : "Hello guest"}
+      </div>
       <div>
         {JSON.stringify(data)}
       </div>

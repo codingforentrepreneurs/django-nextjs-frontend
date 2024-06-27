@@ -1,5 +1,5 @@
 "use server"
-import { setRefreshToken, setToken } from '@/app/lib/auth'
+import { setRefreshToken, setToken } from '@/lib/auth'
 import { NextResponse } from 'next/server'
 
 const DJANGO_API_LOGIN_URL = "http://127.0.0.1:8001/api/token/pair"

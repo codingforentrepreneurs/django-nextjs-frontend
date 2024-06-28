@@ -9,7 +9,7 @@ const NavLinks = [
     {
         label: "Waitlist",
         authRequired: true,
-        href: "/waitlist"
+        href: "/waitlists"
     }
 ]
 

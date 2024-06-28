@@ -45,6 +45,7 @@ export async function POST(request) {
     console.log(response.status)
     try {
         const responseData = await response.json()
+        console.log(responseData)
     } catch (error) {
         NextResponse.json({message: "Invalid request."}, {status: response.status})
     }

@@ -6,6 +6,7 @@ import { Inter as FontSans } from "next/font/google"
  
 import { cn } from "@/lib/utils"
 import { ThemeProvider } from "@/components/themeProvider";
+import BaseLayout from "@/components/layout/BaseLayout";
  
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -32,7 +33,9 @@ export default function RootLayout({ children }) {
             defaultTheme="dark"
         >
         <AuthProvider>
-        {children}
+          <BaseLayout className="flex min-h-[calc(100vh_-_theme(spacing.16))] flex-1 flex-col bg-muted/40">
+              {children}
+          </BaseLayout>
         </AuthProvider>
         </ThemeProvider>
       </body>

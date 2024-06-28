@@ -21,3 +21,36 @@ export async function GET(request){
     let status = response.status
     return NextResponse.json({...result}, {status: status})
 }
+
+
+export async function POST(request) {
+    const requestData = await request.json()
+    const jsonData = JSON.stringify(requestData)
+    let headers = {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+    }
+    const authToken = getToken()
+    if (authToken) {
+        headers["Authorization"] = `Bearer ${authToken}`
+    }
+    const requestOptions = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: jsonData
+    }
+    const response = await fetch(DJANGO_API_WAITLISTS_URL, requestOptions)
+    console.log(response.status)
+    try {
+        const responseData = await response.json()
+    } catch (error) {
+        NextResponse.json({message: "Invalid request."}, {status: response.status})
+    }
+    
+    if (response.ok) {
+        return NextResponse.json({}, {status: 200})
+    }
+    return NextResponse.json({}, {status: 400})
+}   

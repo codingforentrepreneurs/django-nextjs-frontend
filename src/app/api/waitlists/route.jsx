@@ -8,7 +8,7 @@ export async function GET(request){
     const response = await ApiProxy.get(DJANGO_API_WAITLISTS_URL, true)
     const result = await response.json()
     let status = response.status
-    return NextResponse.json({...result}, {status: status})
+    return NextResponse.json(result, {status: status})
 }
 
 

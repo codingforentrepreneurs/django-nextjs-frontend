@@ -22,7 +22,7 @@ export const NonUserLinks = [
     {
         label: "Login",
         authRequired: false,
-        href: "/Login"
+        href: "/login"
     }
 ]
 export default NavLinks

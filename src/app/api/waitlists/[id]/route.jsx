@@ -22,3 +22,9 @@ export async function PUT(request, {params}) {
     const {data, status} = await ApiProxy.put(endpoint, requestData, true )
     return NextResponse.json(data, {status: status})
 }   
+
+export async function DELETE(request, {params}) {
+    const endpoint = params?.id ? `${DJANGO_API_WAITLISTS_URL}${params.id}/delete/` : null
+    const {data, status} = await ApiProxy.delete(endpoint, true )
+    return NextResponse.json(data, {status: status})
+}   

@@ -41,6 +41,15 @@ export default class ApiProxy {
         return await ApiProxy.handleFetch(endpoint, requestOptions)
     }
 
+    static async delete(endpoint, requireAuth) {
+        const headers = await ApiProxy.getHeaders(requireAuth)
+        const requestOptions = {
+            method: "DELETE",
+            headers: headers,
+        }
+        return await ApiProxy.handleFetch(endpoint, requestOptions)
+    }
+
     static async post(endpoint, object, requireAuth) {
         const jsonData = JSON.stringify(object)
         const headers = await ApiProxy.getHeaders(requireAuth)

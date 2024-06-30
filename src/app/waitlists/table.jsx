@@ -38,6 +38,7 @@ export default function WaitlistTable() {
           <TableRow>
             <TableHead className="w-[100px]">ID</TableHead>
             <TableHead>Email</TableHead>
+            <TableHead>Description</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -45,6 +46,7 @@ export default function WaitlistTable() {
             <TableRow className="hover:cursor-pointer" key={`item-${idx}`} onClick={e=>router.push(`/waitlists/${item.id}`)}>
               <TableCell className="font-medium">{item.id}</TableCell>
               <TableCell className="font-medium">{item.email}</TableCell>
+              <TableCell className="font-medium">{item.description}</TableCell>
             </TableRow>
           ))}
         </TableBody>

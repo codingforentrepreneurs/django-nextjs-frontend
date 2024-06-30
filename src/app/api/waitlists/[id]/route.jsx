@@ -14,3 +14,11 @@ export async function GET(request, {params}) {
     const {data, status} = await ApiProxy.get(endpoint, true)
     return NextResponse.json(data, {status: status})
 }
+
+
+export async function PUT(request, {params}) {
+    const endpoint = params?.id ? `${DJANGO_API_WAITLISTS_URL}${params.id}/` : null
+    const requestData = await request.json()
+    const {data, status} = await ApiProxy.put(endpoint, requestData, true )
+    return NextResponse.json(data, {status: status})
+}   
